@@ -1,0 +1,30 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model FlightRequest {
+  createdAt         DateTime                            @default(now())
+  date              DateTime?
+  id                String                              @id @default(cuid())
+  time              DateTime?
+  updatedAt         DateTime                            @updatedAt
+  windTurbineStatus EnumFlightRequestWindTurbineStatus?
+  wtgCode           String?
+}
+
+model Customer {
+  createdAt DateTime @default(now())
+  email     String?
+  id        String   @id @default(cuid())
+  name      String?
+  updatedAt DateTime @updatedAt
+}
+
+enum EnumFlightRequestWindTurbineStatus {
+  Option1
+}
